@@ -60,6 +60,9 @@ export default function Page() {
             alt="Screenshots of the dashboard project showing desktop and mobile versions"
           />
         </div>
+        <Suspense fallback={null}>
+          <IP />
+        </Suspense>
       </div>
     </main>
   );
