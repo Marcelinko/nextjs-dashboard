@@ -2,8 +2,21 @@ import AcmeLogo from "@/app/ui/acme-logo";
 import styles from "./home.module.css";
 import { lusitana } from "@/app/ui/fonts";
 import Image from "next/image";
-
+import { headers } from "next/headers";
 import Link from "next/link";
+import { Suspense } from "react";
+
+function IP() {
+  const FALLBACK_IP_ADDRESS = "0.0.0.0";
+  const forwardedFor = headers().get("x-forwarded-for");
+
+  if (forwardedFor) {
+    return forwardedFor.split(",")[0] ?? FALLBACK_IP_ADDRESS;
+  }
+
+  return headers().get("x-real-ip") ?? FALLBACK_IP_ADDRESS;
+}
+
 export default function Page() {
   return (
     <main className="flex min-h-screen flex-col p-6">
